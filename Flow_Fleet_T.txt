@@ -352,3 +352,14 @@
     },
     "type": "Microsoft.DataFactory/factories/pipelines"
 }
+
+
+
+
+The "Flow_FLEET_T" pipeline within Azure Data Factory is designed to manage a comprehensive monthly data-refresh process for fleet-related information, ensuring data accuracy and timely updates with error handling and advanced processing logic. The pipeline begins with the "PDM_Fleet_monthly_refresh" activity, which triggers a Databricks notebook to aggregate and update the latest fleet data for reporting. This activity integrates essential libraries for tasks like data formatting, holiday management, and notifications. Once complete, the pipeline identifies whether it's the 1st, 2nd, or 3rd business day run to dictate the subsequent data-processing steps.
+
+On the 1st or 2nd day run, the pipeline initiates core data updates via two auxiliary pipelines: "PDM_FLEET_T" and "PDM_FLEET_MV." These pipelines are crucial for validating and refreshing fleet data. PDM_FLEET_T is responsible for the overall refresh of core fleet data tables, ensuring up-to-date records across multiple subsidiaries. This includes snapshot creation, data preparation, and accuracy validation. PDM_FLEET_MV synchronizes the updated fleet data with master views, facilitating regional consistency and data consolidation for reporting.
+
+During the 3rd day run, additional processes are triggered to support broader data retention and reporting compliance. The pipeline activates the transfer of previous-month data and updates a two-month-old snapshot, enhancing historical analysis capabilities. This stage also launches the Fleet_DataCap_to_DS pipeline, which synchronizes fleet data with downstream storage to enable month-over-month insights and extended reporting.
+
+Comprehensive error-handling routines are built into the pipeline, with failure notifications at each stage to ensure prompt stakeholder awareness. In case of any failures, email alerts are sent to designated contacts, minimizing response time. With integrated timeouts, retry configurations, and conditional branching, this pipeline efficiently orchestrates the monthly refresh and integrates seamlessly with downstream data operations, enhancing data reliability and reporting accuracy across the fleet management system.
