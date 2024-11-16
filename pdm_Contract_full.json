@@ -1,0 +1,1682 @@
+{
+    "name": "pdm_contract_full",
+    "properties": {
+        "activities": [
+            {
+                "name": "pdm_contract_full",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "DROP CONSTRAINT",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "AzureDatabricksDeltaLakeSource",
+                        "exportSettings": {
+                            "type": "AzureDatabricksDeltaLakeExportCommand"
+                        }
+                    },
+                    "sink": {
+                        "type": "SqlServerSink",
+                        "preCopyScript": "truncate table  dbo.PDM_CONTRACT_COMPLETE",
+                        "writeBehavior": "insert",
+                        "sqlWriterUseTableLock": true
+                    },
+                    "enableStaging": true,
+                    "stagingSettings": {
+                        "linkedServiceName": {
+                            "referenceName": "Data_Lake_Storage_Gen2_op",
+                            "type": "LinkedServiceReference",
+                            "parameters": {
+                                "url": "https://aldtncdatastgwedatalake.dfs.core.windows.net",
+                                "tenant": "757bdf2a-9fe4-43ea-b5c9-fdb554650622",
+                                "service_principal_id": "bf3bb544-c045-424e-b72e-92f09e89d508",
+                                "spk_secret_name": "KV-DBricks-ADLS-Pwd"
+                            }
+                        },
+                        "path": "hq-datacap-dev/ALDBI/DATAMART/PDM/ADFDLTSTG"
+                    },
+                    "enableSkipIncompatibleRow": true,
+                    "logSettings": {
+                        "enableCopyActivityLog": true,
+                        "copyActivityLogSettings": {
+                            "logLevel": "Warning",
+                            "enableReliableLogging": true
+                        },
+                        "logLocationSettings": {
+                            "linkedServiceName": {
+                                "referenceName": "Data_Lake_Storage_Gen2_op",
+                                "type": "LinkedServiceReference",
+                                "parameters": {
+                                    "url": "https://aldtncdatastgwedatalake.dfs.core.windows.net",
+                                    "tenant": "757bdf2a-9fe4-43ea-b5c9-fdb554650622",
+                                    "service_principal_id": "bf3bb544-c045-424e-b72e-92f09e89d508",
+                                    "spk_secret_name": "KV-DBricks-ADLS-Pwd"
+                                }
+                            },
+                            "path": "hq-datacap-dev/ALDBI/DATAMART/PDM/ADFDLTSTG"
+                        }
+                    },
+                    "translator": {
+                        "type": "TabularTranslator",
+                        "mappings": [
+                            {
+                                "source": {
+                                    "name": "STATUS_INT",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "STATUS_INT",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SNAPSHOT_PERIOD",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "SNAPSHOT_PERIOD",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "COUNTRY",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "COUNTRY",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "COUNTRY_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "COUNTRY_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "COUNTRY_CODE_ISO",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "COUNTRY_CODE_ISO",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SUBSIDIARY_NAME",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "SUBSIDIARY_NAME",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SUBSIDIARY_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "SUBSIDIARY_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "HUB_NAME",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "HUB_NAME",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "BACK_OFFICE_SYSTEM",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "BACK_OFFICE_SYSTEM",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MIGRATED_FLAG",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MIGRATED_FLAG",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VIN",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VIN",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PLATE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "PLATE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "KEY_CONTRACT",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "KEY_CONTRACT",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACT_NUMBER",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "CONTRACT_NUMBER",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_STATUS_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_STATUS_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_STATUS_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_STATUS_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACT_STATUS_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "CONTRACT_STATUS_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACT_STATUS_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "CONTRACT_STATUS_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRODUCT_TYPE_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "PRODUCT_TYPE_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRODUCT_TYPE_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "PRODUCT_TYPE_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "FUNDED_FLEET",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "FUNDED_FLEET",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "USED_CAR_LEASE_FLAG",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "USED_CAR_LEASE_FLAG",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "BUY_BACK_AGREEMENT_FLAG",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "BUY_BACK_AGREEMENT_FLAG",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CUSTOMER_NAME",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "CUSTOMER_NAME",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CUSTOMER_LEGAL_TYPE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "CUSTOMER_LEGAL_TYPE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_TYPE_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_TYPE_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_TYPE_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_TYPE_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MAKE_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MAKE_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MAKE_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MAKE_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MODEL_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MODEL_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MODEL_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MODEL_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MODEL_DESCRIPTION",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MODEL_DESCRIPTION",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MODEL_VERSION",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MODEL_VERSION",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MODEL_YEAR",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MODEL_YEAR",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "FUEL_TYPE_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "FUEL_TYPE_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "FUEL_TYPE_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "FUEL_TYPE_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "FUEL_TYPE_PREDICTED",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "FUEL_TYPE_PREDICTED",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "FUEL_CONSUMPTION",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "FUEL_CONSUMPTION",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ELECTRICITY_CONSUMPTION",
+                                    "type": "Float"
+                                },
+                                "sink": {
+                                    "name": "ELECTRICITY_CONSUMPTION",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "BATTERY_RANGE",
+                                    "type": "Int"
+                                },
+                                "sink": {
+                                    "name": "BATTERY_RANGE",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "BATTERY_CAPACITY_NOMINAL",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "BATTERY_CAPACITY_NOMINAL",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "BATTERY_CAPACITY_USEABLE",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "BATTERY_CAPACITY_USEABLE",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_BODY_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_BODY_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_BODY_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_BODY_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TRANSMISSION_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "TRANSMISSION_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TRANSMISSION_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "TRANSMISSION_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MARKET_SECTOR_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "MARKET_SECTOR_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CO2_EMISSIONS",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CO2_EMISSIONS",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CC",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CC",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DIN_HORSEPOWER",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "DIN_HORSEPOWER",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "GEARS_NUMBER",
+                                    "type": "Int"
+                                },
+                                "sink": {
+                                    "name": "GEARS_NUMBER",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DOORS_NUMBER",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "DOORS_NUMBER",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SEAT_NUMBER",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "SEAT_NUMBER",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_COLOR",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_COLOR",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TARE_WEIGHT",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "TARE_WEIGHT",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "GROSS_WEIGHT",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "GROSS_WEIGHT",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ORDER_DATE",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "ORDER_DATE",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "REGISTRATION_DATE",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "REGISTRATION_DATE",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "START_DATE",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "START_DATE",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EST_RETURN_DATE",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "EST_RETURN_DATE",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "OVERDUE_FLAG",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "OVERDUE_FLAG",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "OVERDUE_DAYS_CURRENT",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "OVERDUE_DAYS_CURRENT",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_RETURN_DATE",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "ACT_RETURN_DATE",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EARLY_OVERDUE_DAYS_ACTUAL",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "EARLY_OVERDUE_DAYS_ACTUAL",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "STOCK_DAYS",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "STOCK_DAYS",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SALE_DATE",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "SALE_DATE",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "START_KM",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "START_KM",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACTUAL_KM_INITIAL",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CONTRACTUAL_KM_INITIAL",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACTUAL_KM_UPDATED",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CONTRACTUAL_KM_UPDATED",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACTUAL_KM",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CONTRACTUAL_KM",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EST_TOTAL_KM",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "EST_TOTAL_KM",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_TOTAL_KM",
+                                    "type": "Float"
+                                },
+                                "sink": {
+                                    "name": "ACT_TOTAL_KM",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "LAST_KNOWN_KM",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "LAST_KNOWN_KM",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "LAST_KNOWN_KM_DATE",
+                                    "type": "DateTime"
+                                },
+                                "sink": {
+                                    "name": "LAST_KNOWN_KM_DATE",
+                                    "type": "DateTime"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "INIT_DURATION",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "INIT_DURATION",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACT_DURATION_INITIAL",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CONTRACT_DURATION_INITIAL",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACT_DURATION_UPDATED",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CONTRACT_DURATION_UPDATED",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CONTRACT_DURATION",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "CONTRACT_DURATION",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EST_TOTAL_DURATION",
+                                    "type": "Int"
+                                },
+                                "sink": {
+                                    "name": "EST_TOTAL_DURATION",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_TOTAL_DURATION_AT_RETURN",
+                                    "type": "Int"
+                                },
+                                "sink": {
+                                    "name": "ACT_TOTAL_DURATION_AT_RETURN",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_TOTAL_DURATION_AT_SALE",
+                                    "type": "Int"
+                                },
+                                "sink": {
+                                    "name": "ACT_TOTAL_DURATION_AT_SALE",
+                                    "type": "Int32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CURRENCY_ISO",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "CURRENCY_ISO",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EXCHANGE_RATE",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "EXCHANGE_RATE",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VAT_PCT",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "VAT_PCT",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_VEHICLE_AM_LOC",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_VEHICLE_AM_LOC",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_VEHICLE_AM_EUR",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_VEHICLE_AM_EUR",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_VEHICLE_DISC_AM_LOC",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_VEHICLE_DISC_AM_LOC",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_VEHICLE_DISC_AM_EUR",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_VEHICLE_DISC_AM_EUR",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_OPTIONAL_AM_LOC",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_OPTIONAL_AM_LOC",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_OPTIONAL_AM_EUR",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_OPTIONAL_AM_EUR",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_OPTIONAL_DISC_AM_LOC",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_OPTIONAL_DISC_AM_LOC",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_OPTIONAL_DISC_AM_EUR",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_OPTIONAL_DISC_AM_EUR",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_TOTAL_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "PRICE_TOTAL_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_TOTAL_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "PRICE_TOTAL_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_ACCESSORIES_AM_LOC",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_ACCESSORIES_AM_LOC",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRICE_ACCESSORIES_AM_EUR",
+                                    "type": "Double"
+                                },
+                                "sink": {
+                                    "name": "PRICE_ACCESSORIES_AM_EUR",
+                                    "type": "Double"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "INVESTMENT_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "INVESTMENT_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "INVESTMENT_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "INVESTMENT_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_BOOK_VALUE_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "ACT_BOOK_VALUE_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_BOOK_VALUE_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "ACT_BOOK_VALUE_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MONTHLY_DEPRECIATION_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "MONTHLY_DEPRECIATION_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MONTHLY_DEPRECIATION_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "MONTHLY_DEPRECIATION_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TECHNICAL_RV_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "TECHNICAL_RV_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TECHNICAL_RV_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "TECHNICAL_RV_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "LOADING_RV_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "LOADING_RV_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "LOADING_RV_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "LOADING_RV_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EST_END_BOOK_VALUE_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "EST_END_BOOK_VALUE_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EST_END_BOOK_VALUE_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "EST_END_BOOK_VALUE_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "RV_PCT",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "RV_PCT",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_END_BOOK_VALUE_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "ACT_END_BOOK_VALUE_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ACT_END_BOOK_VALUE_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "ACT_END_BOOK_VALUE_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "RV_BASE_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "RV_BASE_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "RV_BASE_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "RV_BASE_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PROCEEDS_FROM_SALE_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "PROCEEDS_FROM_SALE_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PROCEEDS_FROM_SALE_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "PROCEEDS_FROM_SALE_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "RECONDITIONING_INCOME_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "RECONDITIONING_INCOME_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "RECONDITIONING_INCOME_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "RECONDITIONING_INCOME_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "REFURBISHMENT_COST_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "REFURBISHMENT_COST_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "REFURBISHMENT_COST_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "REFURBISHMENT_COST_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TOTAL_SALE_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "TOTAL_SALE_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TOTAL_SALE_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "TOTAL_SALE_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "UCS_PCT",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "UCS_PCT",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EXCESS_MILEAGE_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "EXCESS_MILEAGE_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EXCESS_MILEAGE_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "EXCESS_MILEAGE_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EARLY_TERM_INCOME_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "EARLY_TERM_INCOME_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EARLY_TERM_INCOME_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "EARLY_TERM_INCOME_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DELIVERY_COLLECTION_COSTS_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "DELIVERY_COLLECTION_COSTS_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DELIVERY_COLLECTION_COSTS_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "DELIVERY_COLLECTION_COSTS_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MARKETING_OTHER_COSTS_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "MARKETING_OTHER_COSTS_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "MARKETING_OTHER_COSTS_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "MARKETING_OTHER_COSTS_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CUSTOMER_DISPUTES_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "CUSTOMER_DISPUTES_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CUSTOMER_DISPUTES_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "CUSTOMER_DISPUTES_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "UCS_RESULT_AM_LOC",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "UCS_RESULT_AM_LOC",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "UCS_RESULT_AM_EUR",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "UCS_RESULT_AM_EUR",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "REMARKETING_CHANNEL_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "REMARKETING_CHANNEL_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "REMARKETING_CHANNEL_LOCAL_CODE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "REMARKETING_CHANNEL_LOCAL_CODE",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ENDED_REASON_HOLDING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "ENDED_REASON_HOLDING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CAR_SOLD",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "CAR_SOLD",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "INCLUDED_IN_PALBS",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "INCLUDED_IN_PALBS",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VEHICLE_TYPE_PALBS",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "VEHICLE_TYPE_PALBS",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "OPEN_CALCULATION",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "OPEN_CALCULATION",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PROFIT_SHARING",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "PROFIT_SHARING",
+                                    "type": "String"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PROFIT_SHARING_PCT",
+                                    "type": "Decimal"
+                                },
+                                "sink": {
+                                    "name": "PROFIT_SHARING_PCT",
+                                    "type": "Decimal"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SOURCE_TABLE",
+                                    "type": "String"
+                                },
+                                "sink": {
+                                    "name": "SOURCE_TABLE",
+                                    "type": "String"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "ds_databricksdelta",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "database": "pricing",
+                            "table": "pdm_contract_full"
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "SQL_Server_key_vault_op",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "secret_name": {
+                                "value": "@pipeline().globalParameters.KV_SECRET_HPDM",
+                                "type": "Expression"
+                            },
+                            "schema": {
+                                "value": "@pipeline().globalParameters.SQL_SERVER_SCHEMA_DBO",
+                                "type": "Expression"
+                            },
+                            "table_name": {
+                                "value": "@pipeline().parameters.tableName",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "Upd date refresh",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "pdm_contract_full",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlServerSource",
+                        "sqlReaderQuery": {
+                            "value": "@concat('UPDATE dbo.PDM_CONTRACT_COMPLETE\nSET DATE_REFRESH = GETDATE();\n\nSelect 1 as success;')",
+                            "type": "Expression"
+                        },
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "Generic_op_SQLSERVER_kv_tlbname",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "secret_name": {
+                                "value": "@pipeline().globalParameters.KV_SECRET_HPDM",
+                                "type": "Expression"
+                            },
+                            "schema": {
+                                "value": "@pipeline().globalParameters.SOURCE_DATACAP",
+                                "type": "Expression"
+                            },
+                            "table_name": {
+                                "value": "@pipeline().parameters.tableName",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "name": "DROP CONSTRAINT",
+                "type": "Script",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "Generic_SqlServer_op_kv",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "secret": {
+                            "value": "@pipeline().globalParameters.KV_SECRET_HPDM",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "ALTER TABLE [HPDM].[dbo].[PDM_CONTRACT_FULL] \nDROP CONSTRAINT IF EXISTS [KEY_CONTRACT_FULL_PK_new];"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            },
+            {
+                "name": "CREATE CONSTRAINT",
+                "description": "",
+                "type": "Script",
+                "dependsOn": [
+                    {
+                        "activity": "Upd date refresh",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "linkedServiceName": {
+                    "referenceName": "Generic_SqlServer_op_kv",
+                    "type": "LinkedServiceReference",
+                    "parameters": {
+                        "secret": {
+                            "value": "@pipeline().globalParameters.KV_SECRET_HPDM",
+                            "type": "Expression"
+                        }
+                    }
+                },
+                "typeProperties": {
+                    "scripts": [
+                        {
+                            "type": "Query",
+                            "text": "ALTER TABLE [HPDM].[dbo].[PDM_CONTRACT_FULL] ADD  CONSTRAINT [KEY_CONTRACT_FULL_PK_new] PRIMARY KEY CLUSTERED \n(\n\t[KEY_CONTRACT] ASC\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]\n"
+                        }
+                    ],
+                    "scriptBlockExecutionTimeout": "02:00:00"
+                }
+            }
+        ],
+        "parameters": {
+            "tableName": {
+                "type": "string",
+                "defaultValue": "PDM_CONTRACT_COMPLETE"
+            }
+        },
+        "folder": {
+            "name": "PRICING/FLEET"
+        },
+        "annotations": []
+    }
+}
